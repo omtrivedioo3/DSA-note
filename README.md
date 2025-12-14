@@ -3,18 +3,6 @@ A complete and structured guide covering **Data Structures**, **Algorithms**, **
 
 ---
 
-# 📂 Contents
-- [Introduction](#introduction)
-- [Data Structures](#data-structures)
-- [Algorithmic Patterns](#algorithmic-patterns)
-- [Time & Space Complexity Table](#time--space-complexity-table)
-- [When to Use Which Data Structure](#when-to-use-which-data-structure)
-- [Mathematical & Utility Concepts](#mathematical--utility-concepts)
-- [Cheat Sheets](#cheat-sheets)
-- [Learning Path](#learning-path)
-
----
-
 # 🧠 Introduction
 This repository contains well-structured notes for DSA, covering:
 
