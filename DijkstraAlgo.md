@@ -146,7 +146,3 @@ Shortest distances from source 0:
 # 🎯 Summary
 
 Dijkstra is the optimal shortest‑path algorithm for **non‑negative weighted graphs** and is widely used in real‑world routing systems. Bellman–Ford is more powerful but far slower, and should only be used when negative weights are present.
-
----
-
-Reply **B** when you're ready for the Bellman–Ford repository file!
