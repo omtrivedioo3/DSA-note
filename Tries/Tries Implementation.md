@@ -1,17 +1,4 @@
-# Trie (Prefix Tree) 
-It covers:
-
-* Core concept & intuition
-* Proper tree diagrams
-* Detailed C++ implementation
-* Advanced Trie operations
-* Time & space complexity
-* When to use / not use
-* Comparisons with other data structures
-* Real-world applications
-* Interview-ready notes & Q&A
-
----
+# Trie (Prefix Tree
 
 # 📘 Introduction
 
@@ -181,6 +168,72 @@ Where N = number of words
 ✖ When memory is constrained
 ✖ When only full-string lookup needed (use hash set)
 ✖ When alphabet is very large
+
+---
+
+# ❓ Why Use Trie Instead of map / set (INTERVIEW MUST-KNOW)
+
+This is a **very common interview follow-up**.
+
+### Core Reason
+
+> **Trie optimizes prefix-based operations, while map/set optimize key-based ordering.**
+
+---
+
+## Trie vs map vs set (Conceptual Difference)
+
+| Aspect            | Trie                       | map / set     |
+| ----------------- | -------------------------- | ------------- |
+| Basis             | Character-level            | Key-level     |
+| Prefix Search     | O(L)                       | O(log N + L)  |
+| Depends on #words | ❌                          | ✔             |
+| Memory            | High                       | Medium        |
+| Ordering          | Lexicographical by default | Sorted by key |
+
+---
+
+## Why Trie is Better for Prefix Problems
+
+### Example: Autocomplete
+
+Words = 1 million
+Prefix = "app"
+
+* **Trie**: walks only 3 levels → O(3)
+* **map/set**: log(N) search + string comparisons
+
+👉 Trie performance depends on **word length**, not number of words.
+
+---
+
+## Why map/set Can Be Slower for Prefix Search
+
+In map/set:
+
+* `lower_bound("app")` finds start
+* Must iterate until prefix breaks
+* Each comparison compares strings character by character
+
+Worst case:
+
+```
+O(log N + K * L)
+```
+
+---
+
+## When map/set is Better Than Trie
+
+✔ When only full-word lookup needed
+✔ When memory is constrained
+✔ When prefix queries are rare
+
+---
+
+## Interview Soundbite (You Can Say This)
+
+> "Trie is preferred when prefix queries dominate, because it avoids repeated string comparisons and scales with word length, not dataset size."
 
 ---
 
