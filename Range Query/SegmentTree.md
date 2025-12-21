@@ -81,9 +81,13 @@ public:
     }
 
     int query(int idx, int low, int high, int l, int r) {
-        if (r < low || high < l) return 0;          // No overlap
-        if (l <= low && high <= r) return seg[idx]; // Total overlap
+        // No overlap
+        if (r < low || high < l) return 0;
 
+        // Total overlap
+        if (l <= low && high <= r) return seg[idx];
+
+        // Partial overlap
         int mid = (low + high) / 2;
         return query(2 * idx + 1, low, mid, l, r)
              + query(2 * idx + 2, mid + 1, high, l, r);
@@ -103,6 +107,49 @@ public:
         seg[idx] = seg[2 * idx + 1] + seg[2 * idx + 2];
     }
 };
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n;
+    cin >> n;                 // size of array
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    SegmentTree st(n);
+    st.build(0, 0, n - 1, arr);
+
+    int q;
+    cin >> q;                 // number of queries
+
+    /*
+        Query types:
+        1 l r  -> range sum query [l, r]
+        2 pos val -> update arr[pos] = val
+    */
+
+    while (q--) {
+        int type;
+        cin >> type;
+
+        if (type == 1) {
+            int l, r;
+            cin >> l >> r;
+            cout << st.query(0, 0, n - 1, l, r) << "\n";
+        }
+        else if (type == 2) {
+            int pos, val;
+            cin >> pos >> val;
+            st.update(0, 0, n - 1, pos, val);
+        }
+    }
+
+    return 0;
+}
+
 ```
 
 ---
