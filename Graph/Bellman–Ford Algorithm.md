@@ -140,6 +140,70 @@ Bellman–Ford handles the **negative edge (-3)** correctly.
 | Use case                 | Large, positive-weight graphs | Graphs with negative weights |
 
 ---
+🔁 Why Does Bellman–Ford Relax Edges N−1 Times?
+
+This is one of the most important conceptual questions interviewers ask about Bellman–Ford.
+
+🧠 Core Theoretical Reason (One-Line Answer)
+
+In a graph with N vertices, the shortest path between any two vertices can have at most N−1 edges (if no cycle is involved).
+
+That is why Bellman–Ford performs exactly N−1 relaxation iterations.
+
+📘 Detailed Explanation (Interview-Grade)
+1️⃣ What One Relaxation Iteration Achieves
+
+Each full pass over all edges allows Bellman–Ford to correctly compute:
+
+Shortest paths that use at most one more edge than before.
+
+Bellman–Ford works like Dynamic Programming on path length:
+
+Iteration	Shortest paths guaranteed
+1st	Paths using ≤ 1 edge
+2nd	Paths using ≤ 2 edges
+3rd	Paths using ≤ 3 edges
+…	…
+N−1	Paths using ≤ N−1 edges
+2️⃣ Why a Shortest Path Never Needs ≥ N Edges
+
+If a path uses N or more edges in a graph with N vertices:
+
+At least one vertex must repeat
+
+A repeated vertex implies a cycle
+
+Cycle analysis:
+
+Cycle Type	Effect
+Positive	Removing cycle shortens path
+Zero	Removing cycle doesn’t change path
+Negative	Distance decreases indefinitely ❌
+
+👉 Therefore:
+
+Valid shortest paths never include cycles
+
+Maximum edges required = N−1
+
+⚠️ Why the Extra Iteration Detects Negative Cycles
+
+After N−1 iterations, distances are finalized.
+
+If one more relaxation still improves distance:
+
+dist[u] + w < dist[v]
+
+
+Then:
+
+Path uses ≥ N edges
+
+A cycle exists
+
+Since distance decreases → negative cycle
+
+That is why the final pass works.
 
 # 🎯 Summary
 
