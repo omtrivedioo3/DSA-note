@@ -16,6 +16,42 @@ Interviewers test:
 * Do you understand iterator & memory behavior?
 
 ---
+# 📌 StringStream in C++
+`stringstream` is a powerful utility provided by the C++ Standard Library that allows developers to **treat strings as input/output streams**, similar to `cin` and `cout`.
+
+It is extremely useful for:
+- Parsing strings
+- Tokenizing input
+- Converting strings to numbers
+- Handling formatted and delimited data
+
+🔹 What is stringstream?
+
+stringstream belongs to the <sstream> header and provides an interface to:
+
+Read data from strings
+
+Write data into strings
+
+Parse structured text easily
+
+It works exactly like standard streams (cin, cout) but operates on strings instead of stdin/stdout.
+
+
+   string sst = "1,2,3,4,5,6,";
+    stringstream st(sst);
+    string token;
+
+    while (getline(st, token, ',')) {
+        cout << token << endl;
+    }
+    Output
+1
+2
+3
+4
+5
+6
 
 # 1️⃣ vector (Dynamic Array)
 
