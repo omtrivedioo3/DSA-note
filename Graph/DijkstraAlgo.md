@@ -67,36 +67,87 @@ Dijkstra is far more efficient when all edges are non‑negative.
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> dijkstra(int N, vector<vector<int>>& edges) {
-    vector<vector<pair<int,int>>> adj(N);
-    for(auto &e : edges) {
-        adj[e[0]].push_back({e[1], e[2]});
-    }
+/* Define P as a shorthand 
+for the pair<int, int> type */
+#define P pair<int,int>
 
-    vector<int> dist(N, INT_MAX);
-    dist[0] = 0;
-
-    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-    pq.push({0, 0});
-
-    while(!pq.empty()){
-        auto [d, u] = pq.top();
-        pq.pop();
-
-        if(d > dist[u]) continue;
-
-        for(auto &p : adj[u]){
-            int v = p.first;
-            int w = p.second;
-
-            if(dist[u] + w < dist[v]){
-                dist[v] = dist[u] + w;
-                pq.push({dist[v], v});
+class Solution {
+public:
+    /* Function to find the shortest distance of all 
+    the vertices from the source vertex S. */
+    vector <int> dijkstra(int V, vector<vector<int>> adj[], 
+                          int S) {
+                                
+        // Priority queue 
+        priority_queue <P, vector<P>, greater<P>> pq;
+        
+        // Distance array
+        vector<int> dist(V, 1e9);
+        
+        // Distance of source node from itself is 0
+        dist[S] = 0;
+        
+        // Add the source node to the priority queue
+        pq.push({0, S});
+        
+        // Until the priority queue is empty
+        while(!pq.empty()) {
+            
+            // Get the tentative distance
+            int dis = pq.top().first;
+            
+            // Get the node
+            int node = pq.top().second;
+            pq.pop();
+            
+            // Traverse all its neighbors
+            for(auto it : adj[node]) {
+                
+                int adjNode = it[0]; // node
+                int edgeWt = it[1]; // edge weight
+                
+                /* If the tentative distance to 
+                reach adjacent node is smaller 
+                than the known distance */
+                if(dis + edgeWt < dist[adjNode]) {
+                    
+                    // Update the known distance
+                    dist[adjNode] = dis + edgeWt;
+                    
+                    // Push the new pair in priority queue
+                    pq.push({dist[adjNode], adjNode});
+                }
             }
         }
+        
+        // Return the result
+        return dist;
     }
+};
 
-    return dist;
+int main() {
+    
+    int V = 2, S = 0;
+    vector<vector<int>> adj[V] = {
+        {{1, 9}}, 
+        {{0, 9}}
+    };
+    
+    /* Creating an instance of 
+    Solution class */
+    Solution sol; 
+    
+    /* Function call to find the shortest distance 
+    of each node from the source node */
+    vector<int> ans = sol.dijkstra(V, adj, S);
+    
+    // Output
+    cout << "The shortest distance of nodes from the source node is: ";
+    for(int i=0; i < V; i++) {
+        cout << ans[i] << " ";
+    }
+    
+    return 0;
 }
 ```
 
