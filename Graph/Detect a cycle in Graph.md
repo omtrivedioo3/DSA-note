@@ -98,6 +98,67 @@ bool isCycleUndirected(int V, vector<int> adj[]) {
     return false;
 }
 ```
+# 🔄 Find nodes that form Cycle  in Undirected Graph
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<vector<int>> graph;
+    vector<int> parent;
+    vector<bool> visited, inCycle;
+
+    int cycleStart = -1, cycleEnd = -1;
+
+    // DFS to detect cycle in undirected graph
+    bool dfs(int node, int par) {
+        visited[node] = true;
+        parent[node] = par;
+
+        for (int neigh : graph[node]) {
+            if (neigh == par) continue;
+
+            if (!visited[neigh]) {
+                if (dfs(neigh, node))
+                    return true;
+            } 
+            else {
+                // Cycle detected
+                cycleStart = neigh;
+                cycleEnd = node;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    vector<int> distanceToCycle(int n, vector<vector<int>>& edges) {
+
+        // Step 1: Build graph
+        graph.resize(n);
+        for (auto &e : edges) {
+            graph[e[0]].push_back(e[1]);
+            graph[e[1]].push_back(e[0]);
+        }
+
+        visited.assign(n, false);
+        parent.assign(n, -1);
+        inCycle.assign(n, false);
+
+        // Step 2: Find cycle using DFS
+        dfs(0, -1);
+
+        // Step 3: Mark all nodes in the cycle
+        int cur = cycleEnd;
+        inCycle[cur] = true;
+
+        while (cur != cycleStart) {
+            cur = parent[cur];
+            inCycle[cur] = true;
+        }
+	}
+};
 
 ---
 
@@ -142,6 +203,7 @@ bool isCycleDirected(int V, vector<int> adj[]) {
             if (dfsDirected(i, adj, vis, pathVis)) return true;
         }
     }
+	// pathVis has all nodes which form cycles
     return false;
 }
 ```
