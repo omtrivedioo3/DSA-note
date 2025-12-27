@@ -99,6 +99,7 @@ bool isCycleUndirected(int V, vector<int> adj[]) {
 }
 ```
 # 🔄 Find nodes that form Cycle  in Undirected Graph
+```cpp
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -159,7 +160,7 @@ public:
         }
 	}
 };
-
+```
 ---
 
 # 🔄 Cycle Detection in DIRECTED Graph
