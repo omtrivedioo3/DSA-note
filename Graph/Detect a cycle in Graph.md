@@ -216,6 +216,8 @@ bool isCycleDirected(int V, vector<int> adj[]) {
 ## 🧠 Idea
 
 * If topological sort does NOT include all nodes → cycle exists
+
+ ```cpp
 class Solution {
 private:
     /* Function to return the topological
@@ -262,6 +264,7 @@ public:
         return false;
     }
 };
+```
 ### Time Complexity
 
 ```
