@@ -120,7 +120,9 @@ vector<int> topoSort(int N, vector<int> adj[]) {
             if(--indeg[v] == 0) q.push(v);
         }
     }
-
+    if (topo.size() < N) {
+        // Cycle detected
+    }
     return topo;
 }
 ```
