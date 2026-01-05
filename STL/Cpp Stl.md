@@ -220,8 +220,29 @@ mp.at(key);    // throws exception if missing
 ```cpp
 auto first = *st.begin();
 auto last  = *prev(st.end());
-```
 
+
+auto result = st.insert(x);
+auto it = result.first;
+
+```
+For std::set, the insert() function returns a pair:
+
+pair<iterator, bool>
+
+Meaning of the pair:
+
+first → iterator pointing to the element in the set
+
+second → true if insertion happened, false if element already existed
+
+```
+set<int> st = {2, 5, 8};
+
+auto it = st.insert(5).first;
+cout << *it; --> 5
+cout << it.second --> true inserted successfully 5
+```
 ---
 
 # 5️⃣ priority_queue (Heap)
